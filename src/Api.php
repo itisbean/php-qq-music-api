@@ -21,9 +21,35 @@ class Api {
      * 通过歌手姓名搜索歌手的歌曲列表
      * @return array
      */
-    public function getMusicListBySinger()
+    public function searchSinger()
     {
+        // "QMCompositeSearchCgi134" : {
+        //     "module" : "qqmusic.adaptor_all",
+        //     "method" : "do_search_v2",
+        //     "param" : {
+        //       "songids" : "214047745,125590497,125253188,125253188",
+        //       "page_id" : 1,
+        //       "highlight" : 1,
+        //       "query" : "Joey Yung",
+        //       "grp" : 1,
+        //       "page_num" : 15,
+        //       "multi_zhida" : 1,
+        //       "sub_searchid" : "0",
+        //       "remoteplace" : "search.iphone.smart",
+        //       "songtypes" : "1,1,1,1",
+        //       "from" : "2,200,",
+        //       "ver" : 0,
+        //       "searchid" : "118297782434885461",
+        //       "nqc_flag" : 0,
+        //       "seqno" : 3,
+        //       "search_type" : 100,
+        //       "auto_page" : 1
+        //     }
+    }
 
+    public function getSonglistBySinger()
+    {
+        
     }
 
     /**
@@ -88,7 +114,7 @@ class Api {
      * 获取QQ音乐排行榜数据
      * @return array
      */
-    public function getMusicRank($rankId, $period = '')
+    public function getRankChart($rankId, $period = '')
     {
         $module = 'musicToplist.ToplistInfoServer';
         $method = 'GetDetail';
@@ -98,6 +124,50 @@ class Api {
         }
         $data = !empty($data['data']) ? $data['data'] : [];
         return $this->_success($data);
+    }
+
+    /**
+     * 巅峰人气榜
+     * @return array
+     */
+    public function getHitList()
+    {
+        // 日榜
+        // https://c.y.qq.com/rsc/fcgi-bin/fcg_global_gift_rank_list.fcg?g_tk=1974362392&uin=358008180&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&g_tk_new_20200303=478998249&ct=23&cv=0&reqtype=1&daystr=1605032384&_=1605032516716
+        
+        // 周榜
+        // https://c.y.qq.com/rsc/fcgi-bin/fcg_global_gift_rank_list.fcg?g_tk=1974362392&uin=358008180&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&g_tk_new_20200303=478998249&ct=23&cv=0&reqtype=2&weeklist=0&year=2020&week=46&_=1605033084674
+
+        // 年榜
+        // https://c.y.qq.com/rsc/fcgi-bin/fcg_global_gift_rank_list.fcg?g_tk=1974362392&uin=358008180&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&g_tk_new_20200303=478998249&ct=23&cv=0&reqtype=3&year=2020&_=1605033159047
+
+        // 总榜
+        // https://c.y.qq.com/rsc/fcgi-bin/fcg_global_gift_rank_list.fcg?g_tk=1974362392&uin=358008180&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&g_tk_new_20200303=478998249&ct=23&cv=0&reqtype=0&weeklist=0&year=2020&week=46&daystr=1605032384&_=1605033181004
+    }
+
+    /**
+     * 专辑热销榜
+     * @return array
+     */
+    public function getBestSeller()
+    {
+        // AlbumType: all single ep album
+        // RankType:  day week year all
+        // 年榜
+        // {"req_0":{"module":"music.musicMall.MallAlbumBestSellerSvr","method":"GetBestSellerRank","param":{"RankType":"year","Limit":20,"Index":0,"AlbumType":"all"}},"comm":{"g_tk":478998249,"uin":358008180,"format":"json","platform":"h5","ct":23,"cv":0}}
+    }
+
+    /**
+     * 由你音乐榜
+     * @return array
+     */
+    public function getYoRank()
+    {
+        // https://yobang.tencentmusic.com/unichartsapi/v1/songs/charts/dynamic?platform=qqyin&limit=10&offset=0&laiyuan=guanwang&source=006&t=1605034007011
+
+        // 往期
+        // https://yobang.tencentmusic.com/unichartsapi/v1/songs/charts/2020?sort=DESC&flag=history
+        // https://yobang.tencentmusic.com/unichartsapi/v1/songs/charts/history/202044?platform=qqyin&limit=100&offset=0&laiyuan=guanwang&source=006
     }
 
     private function _success($data = [])

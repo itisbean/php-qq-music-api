@@ -1,0 +1,295 @@
+{
+    "QMPersonInfoCgi146": {
+        "module": "music.homepage.HomepageSrv",
+        "method": "GetHomepageHeader",
+        "param": {
+            "uin": "0",
+            "singerId": 118,
+            "singerMid": "",
+            "order": -1,
+            "pageSize": 0,
+            "tabId": "",
+            "tagId": 0,
+            "page": 0,
+            "isNeedTagList": 1,
+            "isNeedSimMvList": 0
+        }
+    },
+
+    "QMPayGuideInfoCgi147": {
+        "module": "music.homepage.HomepageSrv",
+        "method": "GetHomepageBannerList",
+        "param": {
+            "uin": "0",
+            "singerId": 118,
+            "singerMid": ""
+        }
+    },
+
+    "QMTabDetailCgi148": {
+        "module": "music.homepage.HomepageSrv",
+        "method": "GetHomepageTabDetail",
+        "param": {
+            "stype": 0,
+            "uin": "0",
+            "singerMid": "001uXFgt1kpLyI",
+            "tagId": 0,
+            "singerId": 118,
+            "tabId": "song",
+            "isNeedTagList": 1,
+            "startIndex": 20,
+            "order": 1,
+            "sid": 0,
+            "isNeedSimMvList": 0,
+            "video_track_opt": 1,
+            "pageSize": 80
+        }
+    },
+
+    "QMRedDotQueryCgi149": {
+        "module": "music.msgcenter.RedDotServer",
+        "method": "GetRedDotsSimple",
+        "param": {
+            "VecRedDotType": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ]
+        }
+    },
+
+    "QMGetKSongInfoCgi152": {
+        "module": "music.musichallSong.KsongListenInfo",
+        "method": "GetKSongListen",
+        "param": {
+            "mid": "003Inmwn25vHfD",
+            "type": 1,
+            "kmid": "003Qx5wK3YxhIP"
+        }
+    },
+
+    "QMGetPutooRoomPowerMedalCgi157": {
+        "module": "music.liveShow.LiveShowOfficialRoomMedalSvr",
+        "method": "QuerySongExistMedal",
+        "param": {
+            "songID": 280494264,
+            "songType": 1
+        }
+    },
+
+    "QMGetBulletCountCgi164": {
+        "module": "music.bullet.BulletSrv",
+        "method": "GetBulletsCnt",
+        "param": {
+            "subjectType": 0,
+            "subjectId": "003Inmwn25vHfD"
+        }
+    },
+
+    "QMGlobalCommentCgi165": {
+        "module": "GlobalComment.GlobalCommentReadServer",
+        "method": "GetCommentCount",
+        "param": {
+            "request_list": [{
+                "biz_sub_type": 1,
+                "biz_type": 1,
+                "biz_id": "280494264"
+            }]
+        }
+    },
+
+    "QMPlayingViewCommentTipsCgi156": {
+        "module": "music.globalComment.CommentReadServer",
+        "method": "GetTopicTips",
+        "param": {
+            "BizId": "280494264"
+        }
+    },
+
+
+    "ListeningReportCgi167": {
+        "module": "music.richFlag.listening",
+        "method": "ListeningMusicReport",
+        "param": {
+            "songid": 280494264,
+            "speed": 1,
+            "songType": 1,
+            "songPlayTime": 235000,
+            "pauseFlag": false,
+            "songmid": "003Inmwn25vHfD",
+            "remainingTime": 235000
+        }
+    },
+
+    "ListeningReportCgi169": {
+        "module": "music.richFlag.listening",
+        "method": "ListeningMusicReport",
+        "param": {
+            "songid": 280494264,
+            "speed": 1,
+            "songType": 1,
+            "songPlayTime": 235000,
+            "pauseFlag": false,
+            "songmid": "003Inmwn25vHfD",
+            "remainingTime": 236000
+        }
+    },
+
+    "RecentPlaySyncWriteCgi170": {
+        "module": "music.musicasset.PlayRecentlyWrite",
+        "method": "ReportPlayRecentlyInfo",
+        "param": {
+            "data": [{
+                "id": "280494264",
+                "type": 2,
+                "lastTime": 1605034826,
+                "listenCnt": 1
+            }]
+        }
+    },
+
+
+
+
+
+
+    "VKeyAuthCGIListen207": {
+        "module": "vkey.GetVkeyServer",
+        "method": "CgiGetVkey",
+        "param": {
+            "uin": "358008180",
+            "songmid": [
+                "001Eo1rF3gYD09"
+            ],
+            "songtype": [
+                1
+            ],
+            "checklimit": 0,
+            "filename": [
+                "F000001Eo1rF3gYD09.flac"
+            ],
+            "downloadfrom": 0,
+            "guid": "BC7F2F4581C24F4EA450BB64630C788C",
+            "referer": "u6.y.qq.com",
+            "ctx": 0
+        }
+    },
+
+
+
+
+    "QMGetKSongInfoCgi217": {
+        "module": "music.musichallSong.KsongListenInfo",
+        "method": "GetKSongListen",
+        "param": {
+            "mid": "001Eo1rF3gYD09",
+            "type": 1,
+            "kmid": "003YDFG91handr"
+        }
+    },
+    "QMGetPeaknessPageCGI214": {
+        "module": "music.musicToplist.PlayTopInfoServer",
+        "method": "HasPlayTopData",
+        "param": {
+            "requireSongInfo": 0,
+            "songMidList": [
+                "001Eo1rF3gYD09"
+            ]
+        }
+    },
+    "QMGlobalCommentCgi215": {
+        "module": "GlobalComment.GlobalCommentReadServer",
+        "method": "GetCommentCount",
+        "param": {
+            "request_list": [{
+                "biz_sub_type": 1,
+                "biz_type": 1,
+                "biz_id": "280494291"
+            }]
+        }
+    },
+    "QMSongPageRelatedMVCgi212": {
+        "module": "music.video.VideoLogic",
+        "method": "getVideoListBySongidForPlayPage",
+        "param": {
+            "from": 33,
+            "fetchAll": 0,
+            "song_type": 1,
+            "required": [
+                "name",
+                "vid",
+                "cover_pic",
+                "duration",
+                "playcnt"
+            ],
+            "excludeVidList": [
+
+            ],
+            "song_id": 280494291
+        }
+    },
+    "QMPlayingViewFollowStatusCgi216": {
+        "module": "music.BaseUserConcern.BaseUserConcernInfo",
+        "method": "QueryConcernShouldShow",
+        "param": {
+            "SingeridVec": [
+                118,
+                1518533
+            ]
+        }
+    },
+    "comm": {
+        "ifa": "",
+        "OpenUDID": "BC7F2F4581C24F4EA450BB64630C788C",
+        "mnc": "01",
+        "fPersonality": "0",
+        "traceid": "12_1087907334_32230874",
+        "chunk": "0",
+        "v4ip": "14.20.88.217",
+        "osver": "14.1",
+        "chid": "001",
+        "nettype": "2",
+        "webp": "0",
+        "mcc": "460",
+        "ct": "1",
+        "v": "90",
+        "sid": "202011110217111087907334",
+        "patch": "106",
+        "uid": "1087907334",
+        "ifv": "87816688-6C89-4F1F-A137-9E2ABB77F18B",
+        "jailbreak": "0",
+        "cv": "100505",
+        "gray": "0",
+        "tmeLoginType": "2",
+        "wid": "4241644532042429140",
+        "tmeAppID": "qqmusic",
+        "qq": "358008180",
+        "authst": "00015faad72c005805ffb1996355041bd13976a0c860c2c016731d7dac6bacbcfe73f1185d47d0dbfe4b01093564c5045f076525ea7106a7c5451267953d9bac4af91deb845c224c74bfce371b54d5014ebb0c604ac6314db3b05d9999d42591",
+        "gzip": "1"
+    },
+    "QMGetPutooRoomPowerMedalCgi211": {
+        "module": "music.liveShow.LiveShowOfficialRoomMedalSvr",
+        "method": "QuerySongExistMedal",
+        "param": {
+            "songID": 280494291,
+            "songType": 1
+        }
+    },
+    "QMPlayingViewFeatureNumCgi213": {
+        "module": "music.musicasset.SongFavRead",
+        "method": "GetSongFansNumberById",
+        "param": {
+            "v_songId": [
+                280494291
+            ]
+        }
+    }
+
+}
