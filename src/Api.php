@@ -21,30 +21,49 @@ class Api {
      * 通过歌手姓名搜索歌手的歌曲列表
      * @return array
      */
-    public function searchSinger()
+    public function searchSinger($keyword)
     {
-        // "QMCompositeSearchCgi134" : {
-        //     "module" : "qqmusic.adaptor_all",
-        //     "method" : "do_search_v2",
-        //     "param" : {
-        //       "songids" : "214047745,125590497,125253188,125253188",
-        //       "page_id" : 1,
-        //       "highlight" : 1,
-        //       "query" : "Joey Yung",
-        //       "grp" : 1,
-        //       "page_num" : 15,
-        //       "multi_zhida" : 1,
-        //       "sub_searchid" : "0",
-        //       "remoteplace" : "search.iphone.smart",
-        //       "songtypes" : "1,1,1,1",
-        //       "from" : "2,200,",
-        //       "ver" : 0,
-        //       "searchid" : "118297782434885461",
-        //       "nqc_flag" : 0,
-        //       "seqno" : 3,
-        //       "search_type" : 100,
-        //       "auto_page" : 1
-        //     }
+        $data = $this->_keywordSearch($keyword);
+        if ($data === false) {
+            return $this->_error();
+        }
+        if (empty($data['body']['singer']['items'])) {
+            return $this->_success();
+        }
+        $singer = $data['body']['singer']['items'][0];
+        return $this->_success([
+            'singerID' => $singer['singerID'],
+            'singerMID' => $singer['singerMID'],
+            'singerName' => $singer['singerName'],
+            'singerName_hilight' => $singer['singerName_hilight'],
+            'singerPic' => $singer['singerPic'],
+            'songNum' => $singer['songNum'],
+            'albumNum' => $singer['albumNum'],
+            'mvNum' => $singer['mvNum']
+        ]);
+    }
+
+    public function searchSong($keyword)
+    {
+        $data = $this->_keywordSearch($keyword);
+        if ($data === false) {
+            return $this->_error();
+        }
+    }
+
+    private function _keywordSearch($keyword, $limit = 100)
+    {
+        // TODO 搜索中文的问题
+        $module = 'qqmusic.adaptor_all';
+        $method = 'do_search_v2';
+        return $this->_get($module, $method, ['query' => $keyword, 'page_id' => 1, 'page_num' => $limit, 'highlight' => 1, 'multi_zhida' => 1]);
+    }
+
+    public function test()
+    {
+        $module = 'music.homepage.HomepageSrv';
+        $method = 'GetHomepageHeader';
+        $data = $this->_get($module, $method, ['albumMid' => $albumMid]);
     }
 
     public function getSonglistBySinger()
@@ -220,13 +239,14 @@ class Api {
                 'param' => $param,
             ]
         ];
-        $queryUrl = self::$baseUrl . '?' . http_build_query(['data' => json_encode($data)]);
+        $queryUrl = self::$baseUrl . '?' . http_build_query(['data' => json_encode($data, JSON_UNESCAPED_UNICODE)]);
         try {
             $response = $this->_client->get($queryUrl);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             return $this->_error('request failed, [' . $response->getStatusCode().']'. $e->getMessage());
         }
         $result = $response->getBody()->getContents();
+        // echo ($result);die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: '.$result['code'], false);
