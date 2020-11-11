@@ -51,19 +51,25 @@ class Api {
         }
     }
 
-    private function _keywordSearch($keyword, $limit = 100)
+    private function _keywordSearch($keyword)
     {
         // TODO 搜索中文的问题
         $module = 'qqmusic.adaptor_all';
         $method = 'do_search_v2';
-        return $this->_get($module, $method, ['query' => $keyword, 'page_id' => 1, 'page_num' => $limit, 'highlight' => 1, 'multi_zhida' => 1]);
+        return $this->_get($module, $method, [
+            'query' => $keyword, 
+            'search_type' => 100,
+            // 'inCharset' => 'GB2312',
+            // 'outCharset' => 'utf-8',
+        ]);
     }
 
     public function test()
     {
-        $module = 'music.homepage.HomepageSrv';
-        $method = 'GetHomepageHeader';
-        $data = $this->_get($module, $method, ['albumMid' => $albumMid]);
+        $module = 'music.liveShow.LiveShowOfficialRoomMedalSvr';
+        $method = 'QuerySongExistMedal';
+        $data = $this->_post($module, $method, ['songID' => 280494291, 'songType' => 1]);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE)."\n";die;
     }
 
     public function getSonglistBySinger()
@@ -219,6 +225,7 @@ class Api {
             return $this->_error('request failed, [' . $response->getStatusCode().']'. $e->getMessage());
         }
         $result = $response->getBody()->getContents();
+        echo $result."\n";die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: '.$result['code'], false);
@@ -241,12 +248,14 @@ class Api {
         ];
         $queryUrl = self::$baseUrl . '?' . http_build_query(['data' => json_encode($data, JSON_UNESCAPED_UNICODE)]);
         try {
-            $response = $this->_client->get($queryUrl);
+            $response = $this->_client->get($queryUrl, [
+                'headers' => ['Content-Type' => 'application/json;charset=UTF-8'],
+            ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             return $this->_error('request failed, [' . $response->getStatusCode().']'. $e->getMessage());
         }
         $result = $response->getBody()->getContents();
-        // echo ($result);die;
+        echo ($result);die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: '.$result['code'], false);

@@ -8,5 +8,5 @@ include_once __DIR__.'/../vendor/autoload.php';
 
 
 $api = new Api();
-$ret = $api->searchSong('Goodbye');
+$ret = $api->searchSinger('容祖儿');
 var_export($ret);
