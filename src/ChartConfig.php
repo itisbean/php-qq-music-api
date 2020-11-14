@@ -2,7 +2,7 @@
 
 namespace qqMusic;
 
-class CHARTConfig {
+class ChartConfig {
     
     // 飙升榜
     const UP_CHART = '62'; 
@@ -62,7 +62,7 @@ class CHARTConfig {
     const YOUTUBE_CHART = '128';
 
 
-    static $dayCHARTs = [
+    static $dayCharts = [
         // 100首
         self::UP_CHART,
         self::NEW_CHART,
@@ -70,33 +70,33 @@ class CHARTConfig {
 
     ];
 
-    static $weekCHARTs = [
+    static $weekCharts = [
         // 周四更新，300首
         self::HOT_CHART,
         // 周四更新，100首
         self::AREA_MAINLAND_CHART,
         self::AREA_HK_CHART,
         self::AREA_TW_CHART,
-        self::AREA_EUAM_CHART,
-        self::AREA_KOREA_CHART,
-        self::AREA_JP_CHART,
+        // self::AREA_EUAM_CHART, 
+        // self::AREA_KOREA_CHART, 
+        // self::AREA_JP_CHART, 
         self::SHOW_CHART,
         self::TV_CHART,
-        self::CARTOON_CHART,
-        self::GAME_CHART,
+        // self::CARTOON_CHART,
+        // self::GAME_CHART,
         // 周四更新，50首
         self::RAP_CHART,
         self::ELE_CHART,
         self::KTV_CHART,
         // 周日更新，100首
-        self::BILLBOARD_CHART,
+        // self::BILLBOARD_CHART,
         // 周一更新，
-        self::ITUNES_CHART,
-        self::MELON_CHART,
+        // self::ITUNES_CHART,
+        // self::MELON_CHART,
         // 周一更新，40首
-        self::UK_CHART,
+        // self::UK_CHART,
         // 周三更新，
-        self::ORICON_CHART,
+        // self::ORICON_CHART,
         // 周四更新，
         self::JOOX_CHART,
         // 周六更新，20首
@@ -105,6 +105,6 @@ class CHARTConfig {
         self::KKBOX_CHART,
         // 周一更新，
         self::YOUTUBE_CHART
-
     ];
+
 }
