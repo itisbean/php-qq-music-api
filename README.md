@@ -14,7 +14,7 @@ composer require itisbean/php-qq-music-api
 // 引入autoload.php（框架中使用不需要）
 include_once __DIR__.'/../vendor/autoload.php';
 // 实例化Api类
-$api = new Api();
+$api = new \qqMusic\Api();
 // 调用
 $ret = $api->searchSinger('容祖儿');
 ```
