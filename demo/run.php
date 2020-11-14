@@ -10,8 +10,8 @@ include_once __DIR__.'/../vendor/autoload.php';
 $api = new Api();
 
 // 搜索歌手
-// $ret = $api->searchSinger('容祖儿');
-// echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
+$ret = $api->searchSinger('容祖儿');
+echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
 
 // 歌手歌曲列表
 // $ret = $api->getSonglistBySinger('001uXFgt1kpLyI', 1, 100);
@@ -62,5 +62,5 @@ $api = new Api();
 // echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
 
 // 由你音乐榜
-$ret = $api->getYoRank();
-echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
+// $ret = $api->getYoRank();
+// echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";

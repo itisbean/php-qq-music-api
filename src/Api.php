@@ -502,7 +502,7 @@ class Api
             return $this->_error('request failed, [' . $response->getStatusCode() . ']' . $e->getMessage());
         }
         $result = $response->getBody()->getContents();
-        // echo $result."\n";die;
+        echo $result."\n";die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: ' . $result['code'], false);
@@ -548,5 +548,20 @@ class Api
         isset($result['data']) && $result = $result['data'];
 
         return $result;
+    }
+
+    /**
+     * 弹幕
+     */
+    public function getBullet()
+    {
+        $module = 'music.bullet.BulletSrv';
+        $method = 'GetBulletsCnt';
+        $param = [
+            'subjectType' => 0,
+            'subjectId' => '001Eo1rF3gYD09'
+        ];
+        $ret = $this->_post($module, $method, $param);
+        echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";die;
     }
 }
