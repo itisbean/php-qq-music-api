@@ -20,6 +20,7 @@ class Api
 
     /**
      * 通过歌手姓名搜索歌手的歌曲列表
+     * @param string $name
      * @return array
      */
     public function searchSinger($name)
@@ -85,8 +86,10 @@ class Api
      * @param integer $pageSize 每页数量（最大100）
      * @return array
      */
-    public function getSonglistBySinger($singerMid, $page = 1, $pageSize = 10)
+    public function getSonglistBySinger($singerMid, $page = 1, $pageSize = 100)
     {
+        $page > 0 || $page = 1;
+        $pageSize > 0 || $pageSize = 100;
         $module = 'musichall.song_list_server';
         $method = 'GetSingerSongList';
         $data = $this->_get($module, $method, [
@@ -114,8 +117,10 @@ class Api
      * @param integer $pageSize 每页数量（最大80）
      * @return array
      */
-    public function getAlbumlistBySinger($singerMid, $page = 1, $pageSize = 10)
+    public function getAlbumlistBySinger($singerMid, $page = 1, $pageSize = 80)
     {
+        $page > 0 || $page = 1;
+        $pageSize > 0 || $pageSize = 80;
         $module = 'music.musichallAlbum.AlbumListServer';
         $method = 'GetAlbumList';
         $data = $this->_get($module, $method, [
