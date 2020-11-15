@@ -287,18 +287,21 @@ class Api
     /**
      * 获取歌曲的排行榜数据
      * @param mixed $checkSongs 歌曲ID
+     * @param array $rankIds 排行榜ID，为空就用配置中默认的
      * @return array
      */
-    public function getSongsRankInfo($checkSongs)
+    public function getSongsRankInfo($checkSongs, $rankIds = [])
     {
         if (!is_array($checkSongs)) {
             $checkSongs = explode(',', $checkSongs);
         }
         $checkSongs = array_flip($checkSongs);
         $rankInfo = [];
-        // 配置中包含的榜单
-        $rankList = array_merge(ChartConfig::$dayCharts, ChartConfig::$weekCharts);
-        foreach ($rankList as $rankId) {
+        if (!$rankIds) {
+            // 配置中包含的榜单
+            $rankIds = array_merge(ChartConfig::$dayCharts, ChartConfig::$weekCharts);
+        }
+        foreach ($rankIds as $rankId) {
             $data = $this->getRankChart($rankId);
             if ($data['ret']) {
                 $data = $data['data'];
@@ -320,6 +323,7 @@ class Api
                     ];
                 }
             }
+            usleep(500);
         }
         return $this->_success($rankInfo);
     }
@@ -327,18 +331,22 @@ class Api
     /**
      * 获取歌手排行榜数据
      * @param mixed $checkSingers 歌手Mid
+     * @param array $rankIds 排行榜ID，为空就用配置中默认的
      * @return array
      */
-    public function getSingersRankInfo($checkSingers)
+    public function getSingersRankInfo($checkSingers, $rankIds = [])
     {
         if (!is_array($checkSingers)) {
             $checkSingers = explode(',', $checkSingers);
         }
         $checkSingers = array_flip($checkSingers);
         $rankInfo = [];
-        // 配置中包含的榜单
-        $rankList = array_merge(ChartConfig::$dayCharts, ChartConfig::$weekCharts);
-        foreach ($rankList as $rankId) {
+        
+        if (!$rankIds) {
+            // 配置中包含的榜单
+            $rankIds = array_merge(ChartConfig::$dayCharts, ChartConfig::$weekCharts);
+        }
+        foreach ($rankIds as $rankId) {
             $data = $this->getRankChart($rankId);
             if ($data['ret']) {
                 $data = $data['data'];
@@ -360,6 +368,7 @@ class Api
                     ];
                 }
             }
+            usleep(500);
         }
         return $this->_success($rankInfo);
     }

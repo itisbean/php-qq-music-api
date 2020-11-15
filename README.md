@@ -130,6 +130,7 @@ $api->getRankChart(\qqMusic\ChartConfig::BILLBOARD_CHART);
 /**
  * 获取歌曲的排行榜数据
  * @param mixed $checkSongs songId
+ * @param array $rankIds 排行榜ID，为空就用配置中默认的
  * @return array
  */
 $api->getSongsRankInfo([280494291,280494264]);
@@ -141,6 +142,7 @@ $api->getSongsRankInfo([280494291,280494264]);
 /**
  * 获取歌手排行榜数据
  * @param mixed $checkSingers singerMid
+ * @param array $rankIds 排行榜ID，为空就用配置中默认的
  * @return array
  */
 $api->getSingersRankInfo(['001uXFgt1kpLyI']);
