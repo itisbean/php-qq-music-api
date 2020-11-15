@@ -221,6 +221,7 @@ class Api
         if ($data === false) {
             return $this->_error();
         }
+        isset($data['data']) && $data = $data['data'];
         return $this->_success($data);
     }
 
@@ -315,6 +316,7 @@ class Api
                 if ($list) {
                     $rankInfo[] = [
                         'topId' => $data['topId'],
+                        'updateType' => $data['updateType'],
                         'title' => $data['title'],
                         'titleShare' => $data['titleShare'],
                         'period' => $data['period'],
@@ -511,7 +513,7 @@ class Api
             return $this->_error('request failed, [' . $response->getStatusCode() . ']' . $e->getMessage());
         }
         $result = $response->getBody()->getContents();
-        echo $result."\n";die;
+        // echo $result."\n";die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: ' . $result['code'], false);
