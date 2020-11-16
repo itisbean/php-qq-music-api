@@ -132,8 +132,6 @@ class Api
         if ($data === false) {
             return $this->_error();
         }
-        echo count($data['albumList']) . "\n";
-        die;
         return $this->_success($data);
     }
 
