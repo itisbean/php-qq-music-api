@@ -253,10 +253,11 @@ class Api
      */
     public function getRankChart($rankId, $period = '')
     {
-        if (!$period && in_array($rankId, ChartConfig::$dayCharts)) {
-            $period = date('Y-m-d'); // 日榜，当天，也可以获取往期
-        } elseif (!$period) {
+        $isWeek = in_array($rankId, ChartConfig::$weekCharts);
+        if (!$period && $isWeek) {
             $period = date('Y') . '_' . date('W'); // 周榜，周数
+        } elseif (!$period) {
+            $period = date('Y-m-d'); // 日榜，当天，也可以获取往期
         }
         $module = 'musicToplist.ToplistInfoServer';
         $method = 'GetDetail';
@@ -269,9 +270,10 @@ class Api
         $data = $this->_post($module, $method, $param);
         if ($data === false) {
             // 周榜 本周还没有更新，就获取上一周的数据
-            if ($this->_errMsg == 'result code: 2000') {
-                if (date('W') - 1 > 0) {
-                    $period = date('Y') . '_' . (date('W') - 1);
+            if ($this->_errMsg == 'result code: 2000' && $isWeek) {
+                $w = explode('_', $period)[1];
+                if ($w - 1 > 0) {
+                    $period = date('Y') . '_' . ($w - 1);
                 } else {
                     $period = (date('Y') - 1)  . '_' . date('W', strtotime('-1 week'));
                 }
