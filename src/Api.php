@@ -510,7 +510,7 @@ class Api
         try {
             $response = $this->_client->post(self::$baseUrl, ['json' => $data]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            return $this->_error('request failed, [' . $response->getStatusCode() . ']' . $e->getMessage());
+            return $this->_error('request failed, [' . $e->getCode() . ']' . $e->getMessage(), false);
         }
         $result = $response->getBody()->getContents();
         // echo $result."\n";die;
@@ -547,7 +547,7 @@ class Api
         try {
             $response = $this->_client->get($queryUrl);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            return $this->_error('request failed, [' . $response->getStatusCode() . ']' . $e->getMessage());
+            return $this->_error('request failed, [' . $e->getCode() . ']' . $e->getMessage(), false);
         }
         $result = $response->getBody()->getContents();
         // echo ($result)."\n";die;
