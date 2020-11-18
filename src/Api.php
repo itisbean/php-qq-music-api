@@ -46,6 +46,28 @@ class Api
     }
 
     /**
+     * 获取歌手粉丝数
+     * @param string $singerMid
+     * @return array
+     */
+    public function getSingerFanNum($singerMid)
+    {
+        $module = 'Concern.ConcernSystemServer';
+        $method = 'cgi_qry_concern_num';
+        $data = $this->_get($module, $method, [
+            'vec_userinfo' => [
+                ['usertype' => 1, 'userid' => $singerMid]
+            ],
+            'opertype' => 6
+        ]);
+        if ($data === false) {
+            return $this->_error();
+        }
+        isset($data['map_singer_num']) && $data = $data['map_singer_num'];
+        return $this->_success($data);
+    }
+
+    /**
      * 手机抓包接口（弃）
      */
     private function _keywordSearchBak($keyword)
