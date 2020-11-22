@@ -384,6 +384,7 @@ class Api
                 if ($list) {
                     $rankInfo[] = [
                         'topId' => $data['topId'],
+                        'updateType' => $data['updateType'],
                         'title' => $data['title'],
                         'titleShare' => $data['titleShare'],
                         'period' => $data['period'],
