@@ -141,11 +141,11 @@ $api->getSongsRankInfo([280494291,280494264]);
 ```php
 /**
  * 获取歌手排行榜数据
- * @param mixed $checkSingers singerMid
+ * @param string $singerName 歌手名
  * @param array $rankIds 排行榜ID，为空就用配置中默认的
  * @return array
  */
-$api->getSingersRankInfo(['001uXFgt1kpLyI']);
+$api->getSingersRankInfo('容祖儿');
 ```
 
 ### Top gift rank

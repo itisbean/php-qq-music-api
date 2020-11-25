@@ -45,6 +45,7 @@ class Api
         ]);
     }
 
+    
     /**
      * 获取歌手粉丝数
      * @param string $singerMid
@@ -354,18 +355,13 @@ class Api
 
     /**
      * 获取歌手排行榜数据
-     * @param mixed $checkSingers 歌手Mid
+     * @param string $singerName 歌手名
      * @param array $rankIds 排行榜ID，为空就用配置中默认的
      * @return array
      */
-    public function getSingersRankInfo($checkSingers, $rankIds = [])
+    public function getSingersRankInfo($singerName, $rankIds = [])
     {
-        if (!is_array($checkSingers)) {
-            $checkSingers = explode(',', $checkSingers);
-        }
-        $checkSingers = array_flip($checkSingers);
         $rankInfo = [];
-        
         if (!$rankIds) {
             // 配置中包含的榜单
             $rankIds = array_merge(ChartConfig::$dayCharts, ChartConfig::$weekCharts);
@@ -376,7 +372,7 @@ class Api
                 $data = $data['data'];
                 $list = $data['song'];
                 foreach ($list as $key => $song) {
-                    if (!isset($checkSingers[$song['singerMid']])) {
+                    if (mb_strpos($song['singerName'], $singerName) === false) {
                         unset($list[$key]);
                     }
                 }
