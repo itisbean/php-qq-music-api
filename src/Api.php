@@ -86,7 +86,7 @@ class Api
      * @param string $keyword
      * @return array|bool
      */
-    private function _keywordSearch($keyword)
+    private function _keywordSearch($keyword, $type = '')
     {
         $url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp';
         $param = [
@@ -97,8 +97,11 @@ class Api
             'inCharset' => 'utf8',
             'outCharset' => 'utf8',
             'platform' => 'yqq.json',
-            'needNewCode' => 0
+            'needNewCode' => 0,
         ];
+        if ($type && $type == 'lyric') {
+            $param['t'] = 7;
+        }
         return $this->_get('url', $url, $param);
     }
 
@@ -530,9 +533,14 @@ class Api
             $response = $this->_client->post(self::$baseUrl, ['json' => $data]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             return $this->_error('request failed, [' . $e->getCode() . ']' . $e->getMessage(), false);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            return $this->_error('client exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
+        } catch (\GuzzleHttp\Exception\ServerException $e) {
+            return $this->_error('server exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
+        } catch (\Exception $e) {
+            return $this->_error('other exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
         }
         $result = $response->getBody()->getContents();
-        // echo $result."\n";die;
         $result = json_decode($result, true);
         if ($result['code'] != 0) {
             return $this->_error('code: ' . $result['code'], false);
@@ -566,10 +574,13 @@ class Api
         try {
             $response = $this->_client->get($queryUrl);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            return $this->_error('request failed, [' . $e->getCode() . ']' . $e->getMessage(), false);
+            return $this->_error('client exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
+        } catch (\GuzzleHttp\Exception\ServerException $e) {
+            return $this->_error('server exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
+        } catch (\Exception $e) {
+            return $this->_error('other exception, [' . $e->getCode() . ']' . $e->getMessage(), false);
         }
         $result = $response->getBody()->getContents();
-        // echo ($result)."\n";die;
         $result = json_decode($result, true);
         isset($result['result']) && $result = $result['result'];
         if ($result['code'] != 0) {
@@ -593,5 +604,23 @@ class Api
         ];
         $ret = $this->_post($module, $method, $param);
         echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";die;
+    }
+
+    /**
+     * 搜索歌詞
+     * @param string $text
+     * @return array
+     */
+    public function searchLyrics($text)
+    {
+        $data = $this->_keywordSearch($text, 'lyric');
+        if ($data === false) {
+            return $this->_error();
+        }
+        if (empty($data['lyric']['list'])) {
+            return $this->_success();
+        }
+        $data = $data['lyric']['list'];
+        return $this->_success($data);
     }
 }
