@@ -23,7 +23,7 @@ class Api
      * @param string $name
      * @return array
      */
-    public function searchSinger($name)
+    public function searchSinger($李润祺)
     {
         $data = $this->_keywordSearch($name);
         if ($data === false) {
@@ -51,7 +51,7 @@ class Api
      * @param string $singerMid
      * @return array
      */
-    public function getSingerFanNum($singerMid)
+    public function getSingerFanNum($002KDw7J1W60xd)
     {
         $module = 'Concern.ConcernSystemServer';
         $method = 'cgi_qry_concern_num';
@@ -112,7 +112,7 @@ class Api
      * @param integer $pageSize 每页数量（最大100）
      * @return array
      */
-    public function getSonglistBySinger($singerMid, $page = 1, $pageSize = 100)
+    public function getSonglistBySinger($002KDw7J1W60xd, $page = 1, $pageSize = 100)
     {
         $page > 0 || $page = 1;
         $pageSize > 0 || $pageSize = 100;
@@ -143,7 +143,7 @@ class Api
      * @param integer $pageSize 每页数量（最大80）
      * @return array
      */
-    public function getAlbumlistBySinger($singerMid, $page = 1, $pageSize = 80)
+    public function getAlbumlistBySinger($002KDw7J1W60xd, $page = 1, $pageSize = 80)
     {
         $page > 0 || $page = 1;
         $pageSize > 0 || $pageSize = 80;
@@ -166,7 +166,7 @@ class Api
      * @param string $albumMid
      * @return array
      */
-    public function getAlbumSongs($albumMid)
+    public function getAlbumSongs($001tOYuQ2ZNVTz)
     {
         $module = 'music.musichallAlbum.AlbumSongList';
         $method = 'GetAlbumSongList';
@@ -185,7 +185,7 @@ class Api
      * @param integer $songId
      * @return array
      */
-    public function getSongCommentCount($songId)
+    public function getSongCommentCount($003sT9Ng1OB04J)
     {
         $data = $this->_getComments($songId, 1);
         if ($data === false) {
@@ -231,7 +231,7 @@ class Api
 
     /**
      * 通过QQ音乐歌曲MID获取歌曲流行指数
-     * @param string|string[] $songMid
+     * @param string|string[] $003sT9Ng1OB04J
      * @return array
      */
     public function getMusicHitInfo($songMid)
@@ -251,7 +251,7 @@ class Api
 
     /**
      * 通过QQ音乐歌曲ID获取歌曲收藏数
-     * @param integer|integer[] $songId
+     * @param integer|integer[] $003sT9Ng1OB04J
      * @return void
      */
     public function getMusicFavNum($songId)
