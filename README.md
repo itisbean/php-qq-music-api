@@ -1,6 +1,6 @@
 # php-qq-music-api
 
-qq music's public api for php
+qq music's private api for php
 
 ## Composer Install
 
