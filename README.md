@@ -181,3 +181,26 @@ $api->getBestSeller();
  */
 $api->getYoRank();
 ```
+
+### Search Lyrics
+
+```php
+/**
+ * 搜索歌詞
+ * @param string $text
+ * @return array
+ */
+$api->searchLyrics('跑车开走');
+```
+
+
+### Search Songs
+
+```php
+/**
+ * 搜索歌曲
+ * @param string $name
+ * @return array
+ */
+$api->searchSong('东京人寿');
+```

@@ -25,7 +25,7 @@ class Api
      */
     public function searchSinger($name)
     {
-        $data = $this->_keywordSearch($name);
+        $data = $this->keywordSearch($name);
         if ($data === false) {
             return $this->_error();
         }
@@ -33,16 +33,7 @@ class Api
             return $this->_success();
         }
         $singer = $data['zhida']['zhida_singer'];
-        return $this->_success([
-            'singerID' => $singer['singerID'],
-            'singerMID' => $singer['singerMID'],
-            'singerName' => $singer['singerName'],
-            'singerName_hilight' => $singer['singername_hilight'],
-            'singerPic' => $singer['singerPic'],
-            'songNum' => $singer['songNum'],
-            'albumNum' => $singer['albumNum'],
-            'mvNum' => $singer['mvNum']
-        ]);
+        return $this->_success($singer);
     }
 
     
@@ -86,7 +77,7 @@ class Api
      * @param string $keyword
      * @return array|bool
      */
-    private function _keywordSearch($keyword, $type = '')
+    private function keywordSearch($keyword, $type = '')
     {
         $url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp';
         $param = [
@@ -99,8 +90,20 @@ class Api
             'platform' => 'yqq.json',
             'needNewCode' => 0,
         ];
-        if ($type && $type == 'lyric') {
-            $param['t'] = 7;
+        switch ($type) {
+            case 'lyric':
+                $param['t'] = 7;
+                break;
+            case 'album':
+                $param['t'] = 8;
+                break;
+            case 'song':
+                $param['t'] = 0;
+                break;
+            case 'mv':
+                $param['t'] = 12;
+            default:
+                break;
         }
         return $this->_get('url', $url, $param);
     }
@@ -613,7 +616,7 @@ class Api
      */
     public function searchLyrics($text)
     {
-        $data = $this->_keywordSearch($text, 'lyric');
+        $data = $this->keywordSearch($text, 'lyric');
         if ($data === false) {
             return $this->_error();
         }
@@ -621,6 +624,24 @@ class Api
             return $this->_success();
         }
         $data = $data['lyric']['list'];
+        return $this->_success($data);
+    }
+
+    /**
+     * 搜索歌曲
+     * @param string $name
+     * @return array
+     */
+    public function searchSong($name)
+    {
+        $data = $this->keywordSearch($name, 'song');
+        if ($data === false) {
+            return $this->_error();
+        }
+        if (empty($data['song']['list'])) {
+            return $this->_success();
+        }
+        $data = $data['song']['list'];
         return $this->_success($data);
     }
 }
