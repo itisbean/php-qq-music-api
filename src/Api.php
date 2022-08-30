@@ -25,15 +25,37 @@ class Api
      */
     public function searchSinger($name)
     {
-        $data = $this->keywordSearch($name);
+        // $data = $this->keywordSearch($name);
+        $module = 'music.search.SearchCgiService';
+        $method = 'DoSearchForQQMusicDesktop';
+        $param = [
+            'remoteplace' => 'txt.web.search',
+            'search_type' => 0,
+            'query' => $name,
+            'page_num' => 1,
+            'num_per_page' => 10,
+        ];
+        $data = $this->_post($module, $method, $param);
         if ($data === false) {
             return $this->_error();
         }
-        if (empty($data['zhida']['zhida_singer'])) {
-            return $this->_success();
+        if (!empty($data['body']['zhida']['list'])) {
+            $data = $data['body']['zhida']['list'][0];
+            $des = explode(' ', $data['desciption']);
+            $songNum = !empty($des[0]) ? explode(':', $des[0])[1] : 0;
+            $albumNum = !empty($des[0]) ? explode(':', $des[1])[1] : 0;
+            $mvNum = !empty($des[0]) ? explode(':', $des[2])[1] : 0;
+            return $this->_success([
+                'singerID' => $data['id'],
+                'singerMID' => $data['custom_info']['mid'],
+                'singerName' => $data['title'],
+                'singerPic' => $data['pic'],
+                'songNum' => $songNum,
+                'albumNum' => $albumNum,
+                'mvNum' => $mvNum
+            ]);
         }
-        $singer = $data['zhida']['zhida_singer'];
-        return $this->_success($singer);
+        return $this->_success($data);
     }
 
     
@@ -642,6 +664,44 @@ class Api
             return $this->_success();
         }
         $data = $data['song']['list'];
+        return $this->_success($data);
+    }
+
+    /**
+     * 获取歌单列表
+     * @param int $playId
+     * @return array
+     */
+    public function getPlayList($playId)
+    {
+        $module = 'music.srfDissInfo.aiDissInfo';
+        $method = 'uniform_get_Dissinfo';
+        $param = [
+            'disstid' => (int)$playId,
+            'userinfo' => 1,
+            'tag' => 1,
+            'is_pc' => 1
+        ];
+        $data = $this->_post($module, $method, $param);
+        if ($data === false) {
+            return $this->_error();
+        }
+        return $this->_success($data);
+    }
+
+    public function getSingerInfo($singerMid)
+    {
+        $module = 'music.musichallSinger.SingerInfoInter';
+        $method = 'GetSingerDetail';
+        $param = [
+            'singer_mids' => (array)$singerMid,
+            'pic' => 1,
+            // 'wiki_singer' => 1,
+        ];
+        $data = $this->_post($module, $method, $param);
+        if ($data === false) {
+            return $this->_error();
+        }
         return $this->_success($data);
     }
 }

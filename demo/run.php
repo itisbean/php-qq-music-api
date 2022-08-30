@@ -9,8 +9,12 @@ include_once __DIR__.'/../vendor/autoload.php';
 
 $api = new Api();
 
+// 歌单列表
+// $ret = $api->getPlayList('8257048505');
+// echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
+
 // 搜索歌手
-$ret = $api->searchSinger('容祖儿');
+$ret = $api->searchSinger('Joey Yung');
 echo json_encode($ret, JSON_UNESCAPED_UNICODE)."\n";
 
 // 歌手歌曲列表
